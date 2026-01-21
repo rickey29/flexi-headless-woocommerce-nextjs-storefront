@@ -10,8 +10,15 @@
 !.yarn/releases
 !.yarn/versions
 
+# Lock files (yarn project, ignore npm/pnpm)
+package-lock.json
+pnpm-lock.yaml
+
 # testing
 /coverage
+.nyc_output/
+test-results/
+playwright-report/
 
 # next.js
 /.next/
@@ -20,9 +27,27 @@
 # production
 /build
 
-# misc
+# Build tools / Caches
+.swc/
+.turbo/
+.eslintcache
+
+# IDE / Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
 .DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# misc
 *.pem
+.editorconfig-checker.json
 
 # debug
 npm-debug.log*
@@ -30,8 +55,14 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# pm2 logs and runtime
+/logs
+*.log
+.pm2
+
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +70,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude
+.claude
+
+# Development debugging files
+*-debug.json
+*-test.json
+
+# Security-sensitive files
+*.key
+*.p12
+*.pfx
+secrets.json
+credentials.json
+
+# WSL
+*.Zone.Identifier
