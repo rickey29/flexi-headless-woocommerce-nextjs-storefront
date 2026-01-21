@@ -1,23 +1,57 @@
-# Auto detect text files and normalize line endings
+# Auto detect text files and perform LF normalization
 * text=auto
 
-# Force LF for source files
+# ============================================================
+# Explicit text files (ensure consistent line endings)
+# ============================================================
 *.ts text eol=lf
 *.tsx text eol=lf
 *.js text eol=lf
+*.jsx text eol=lf
 *.mjs text eol=lf
+*.cjs text eol=lf
 *.json text eol=lf
-*.css text eol=lf
 *.md text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.env* text eol=lf
+.prettierrc text eol=lf
+.prettierignore text eol=lf
+.editorconfig text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
 
-# Lock files - text but don't normalize (preserve exact content)
-yarn.lock text -diff linguist-generated
+# ============================================================
+# Lock files - treat as binary to avoid noisy diffs
+# ============================================================
+yarn.lock -diff linguist-generated
+package-lock.json -diff linguist-generated
 
-# Config files
-*.config.ts text eol=lf
-*.config.mjs text eol=lf
-tsconfig.json text eol=lf
+# ============================================================
+# Binary files (prevent corruption)
+# ============================================================
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
+*.pdf binary
 
-# GitHub linguist - mark generated/vendored
+# ============================================================
+# GitHub Linguist (accurate language statistics)
+# ============================================================
+*.lock linguist-generated
 coverage/** linguist-generated
 .next/** linguist-generated
