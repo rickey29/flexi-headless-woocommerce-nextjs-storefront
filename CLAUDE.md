@@ -71,16 +71,19 @@ yarn test:coverage    # Run tests with coverage report
 ### Key Patterns
 
 **1. Rendering Flow:**
+
 ```
 WordPress -> POST /api/v1/product -> Validate with Zod -> Render templates -> Return HTML
 ```
 
 **2. Error Handling:**
+
 - Return 503 with `x-flexi-fallback` header on failure
 - WordPress falls back to native theme rendering
 - Never crash - always return a valid response
 
 **3. Security:**
+
 - All user content must be escaped with `escapeHtml()`
 - All URLs must be sanitized with `sanitizeUrl()`
 - All input must be validated with Zod schemas
@@ -93,19 +96,22 @@ WordPress -> POST /api/v1/product -> Validate with Zod -> Render templates -> Re
 Renders a product detail page.
 
 **Request:**
+
 ```typescript
 {
-  home_url: string;           // WordPress site URL
-  product_data: ProductData;  // Product information
-  site_info: SiteInfo;        // Currency, formatting settings
+  home_url: string; // WordPress site URL
+  product_data: ProductData; // Product information
+  site_info: SiteInfo; // Currency, formatting settings
 }
 ```
 
 **Success Response (200):**
+
 - Content-Type: text/html; charset=utf-8
 - Body: Complete HTML page
 
 **Failure Response (503):**
+
 - Header: x-flexi-fallback: {reason}
 - Body: JSON with error details
 
@@ -134,12 +140,12 @@ function renderPrice(price: string, onSale: boolean): string {
 
 Templates use Storefront theme colors defined in `head.ts`:
 
-| Color               | Hex       | Usage                    |
-| ------------------- | --------- | ------------------------ |
-| `woo-purple`        | #7f54b3   | Primary accent, buttons  |
-| `storefront-text`   | #43454b   | Main text, headings      |
-| `storefront-success`| #0f834d   | Sale prices, success     |
-| `storefront-error`  | #e2401c   | Errors, required fields  |
+| Color                | Hex     | Usage                   |
+| -------------------- | ------- | ----------------------- |
+| `woo-purple`         | #7f54b3 | Primary accent, buttons |
+| `storefront-text`    | #43454b | Main text, headings     |
+| `storefront-success` | #0f834d | Sale prices, success    |
+| `storefront-error`   | #e2401c | Errors, required fields |
 
 ## Logging
 
@@ -152,6 +158,7 @@ logError('Failed', error, { requestId });
 ```
 
 **Environment Variables:**
+
 - `LOG_LEVEL`: debug, info, warn, error (default: debug in dev, warn in prod)
 - `LOG_JSON`: true/false (default: false in dev, true in prod)
 - `SENTRY_DSN`: Optional Sentry error tracking

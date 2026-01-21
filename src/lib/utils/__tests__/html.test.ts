@@ -373,8 +373,7 @@ describe('sanitizePaymentIcon', () => {
     });
 
     test('should not include onerror or other event handlers', () => {
-      const input =
-        '<img src="https://example.com/icon.png" onerror="alert(1)" onclick="steal()">';
+      const input = '<img src="https://example.com/icon.png" onerror="alert(1)" onclick="steal()">';
       const result = sanitizePaymentIcon(input);
       expect(result).not.toContain('onerror');
       expect(result).not.toContain('onclick');

@@ -238,5 +238,4 @@ describe('env configuration', () => {
       expect(config).toHaveProperty('DEBUG');
     });
   });
-
 });

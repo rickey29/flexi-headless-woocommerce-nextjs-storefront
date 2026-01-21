@@ -49,8 +49,11 @@ export function validateRequest<T extends z.ZodSchema>(
   const opts: ValidationOptions =
     typeof options === 'string' ? { fallbackReason: options } : options;
 
-  const { status = 503, fallbackHeader = 'x-flexi-fallback', fallbackReason = 'invalid-request' } =
-    opts;
+  const {
+    status = 503,
+    fallbackHeader = 'x-flexi-fallback',
+    fallbackReason = 'invalid-request',
+  } = opts;
 
   const result = schema.safeParse(data);
 
