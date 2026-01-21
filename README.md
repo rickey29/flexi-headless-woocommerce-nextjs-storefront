@@ -1,4 +1,4 @@
-# FlexiWoo
+# FlexiWoo (headless-woocommerce-nextjs-storefront)
 
 > **Free Open-Source Headless WooCommerce Renderer**
 > Modern, fast, and beautiful store experiences powered by Next.js
@@ -25,7 +25,7 @@ FlexiWoo is a complete headless rendering solution that transforms your WooComme
 
 FlexiWoo consists of two components:
 
-### 1. FlexiWoo Frontend (This Repository)
+### 1. headless-woocommerce-nextjs-storefront (This Repository)
 
 **Next.js Rendering Engine**
 
@@ -35,23 +35,23 @@ FlexiWoo consists of two components:
 
 ### 2. flexi-woo (WordPress Plugin)
 
-**WordPress Bridge**
+**WordPress Bridge** - [See flexi-woo repository](https://github.com/nickey29/flexi-woo)
 
 - **Technology:** PHP 8+, WooCommerce 8+
-- **Purpose:** Intercepts WooCommerce pages, sends data to the renderer, displays rendered HTML
+- **Purpose:** Intercepts WooCommerce pages, sends data to this project, displays rendered HTML
 - **Deployment:** Standard WordPress plugin
 
 **How it works:**
 
 ```
 Customer visits WooCommerce page
-         |
+         ↓
 WordPress/flexi-woo intercepts request
-         |
-flexi-woo sends page data to renderer (POST /api/v1/product, /cart, etc.)
-         |
-Renderer returns HTML with modern design
-         |
+         ↓
+flexi-woo sends page data to this project (POST /api/v1/product, /cart, etc.)
+         ↓
+This project renders HTML with modern design
+         ↓
 WordPress displays the rendered page
 ```
 
@@ -69,7 +69,7 @@ WordPress displays the rendered page
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/headless-woocommerce-nextjs-storefront.git
+git clone https://github.com/nickey29/headless-woocommerce-nextjs-storefront.git
 cd headless-woocommerce-nextjs-storefront
 
 # Install dependencies
@@ -86,9 +86,6 @@ Open [http://localhost:3000](http://localhost:3000) to see the application.
 Create `.env.local` for development:
 
 ```env
-# WordPress site URL (with flexi-woo plugin installed)
-WORDPRESS_URL=http://localhost:8080
-
 # Logging level: debug, info, warn, error
 LOG_LEVEL=debug
 
@@ -134,7 +131,6 @@ yarn test:coverage    # Generate coverage report
       env.ts               # LOG_LEVEL, environment detection
     /schemas/              # Zod validation schemas
     /templates/            # HTML template generators
-    /renderers/            # Page renderers
     /utils/                # Utility functions
       logger.ts            # Structured logging
       sanitize.ts          # PII sanitization
@@ -169,7 +165,7 @@ The response includes:
 
 - Status code: 503 Service Unavailable
 - Header: `x-flexi-fallback: {reason}` (e.g., `validation-error`, `template-error`)
-- Body: JSON with error details
+- Body: HTML error page or empty
 
 The flexi-woo plugin checks for the `x-flexi-fallback` header and displays the native WooCommerce page instead.
 
@@ -196,8 +192,8 @@ All dynamic content is escaped before rendering:
 
 Logging utilities automatically mask sensitive data:
 
-- Email addresses: `john@example.com` -> `j***@e***.com`
-- Phone numbers: `555-1234` -> `***-****`
+- Email addresses: `john@example.com` → `j***@e***.com`
+- Phone numbers: `555-1234` → `***-****`
 - Addresses: Masked before logging
 
 ### Logging
@@ -219,12 +215,12 @@ Configure log level via `LOG_LEVEL` environment variable.
 
 | Technology   | Version | Purpose                  |
 | ------------ | ------- | ------------------------ |
-| Next.js      | 16.x    | React framework with SSR |
-| React        | 19.x    | UI library               |
+| Next.js      | 16.1.1  | React framework with SSR |
+| React        | 19.2.3  | UI library               |
 | TypeScript   | 5.x     | Type safety              |
 | Tailwind CSS | 4.x     | Utility-first styling    |
-| Zod          | 3.x     | Schema validation        |
-| Vitest       | 3.x     | Testing framework        |
+| Zod          | 4.x     | Schema validation        |
+| Vitest       | 4.x     | Testing framework        |
 
 ---
 
@@ -239,6 +235,26 @@ The UI matches the popular WooCommerce Storefront theme for familiarity:
 | Font          | Source Sans Pro                  |
 | Buttons       | Dark background, purple on hover |
 | Links         | Purple on hover with underline   |
+
+---
+
+## Related Projects
+
+### flexi-woo (WordPress Plugin)
+
+The companion WordPress plugin that bridges WooCommerce with this project.
+
+- Repository: [github.com/nickey29/flexi-woo](https://github.com/nickey29/flexi-woo)
+- Status: In Development
+
+### FlxWoo (Premium Complement)
+
+Optional premium product for payment optimization and conversion features:
+
+- **flx** - Premium SaaS with analytics, A/B testing
+- **flx-woo** - WordPress plugin for premium features
+
+FlexiWoo and FlxWoo work together seamlessly - FlexiWoo handles UI rendering, FlxWoo adds premium payment/conversion features.
 
 ---
 
@@ -274,8 +290,8 @@ MIT License - Free for personal and commercial use.
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/your-username/headless-woocommerce-nextjs-storefront/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/your-username/headless-woocommerce-nextjs-storefront/discussions)
+- **Issues:** [GitHub Issues](https://github.com/nickey29/headless-woocommerce-nextjs-storefront/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/nickey29/headless-woocommerce-nextjs-storefront/discussions)
 
 ---
 

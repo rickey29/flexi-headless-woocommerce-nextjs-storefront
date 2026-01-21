@@ -1,8 +1,8 @@
-# Contributing to FlexiWoo
+# Contributing to headless-woocommerce-nextjs-storefront
 
-Thank you for contributing to FlexiWoo.
+Thank you for contributing to this project.
 
-FlexiWoo is a **stateless rendering engine** with intentionally strict architectural boundaries. These rules are not preferences — they are **non-negotiable constraints** designed to keep FlexiWoo fast, secure, and predictable.
+This project is a **stateless rendering engine** with intentionally strict architectural boundaries. These rules are not preferences — they are **non-negotiable constraints** designed to keep this project fast, secure, and predictable.
 
 **If a contribution violates any rule below, it will not be accepted.**
 
@@ -10,28 +10,28 @@ FlexiWoo is a **stateless rendering engine** with intentionally strict architect
 
 ## 1. Core Principle (Must Read)
 
-> **FlexiWoo is a pure rendering function: JSON in, HTML out, no side effects.**
+> **This project is a pure rendering function: JSON in, HTML out, no side effects.**
 
-Any code that violates this principle does not belong in FlexiWoo.
+Any code that violates this principle does not belong in this project.
 
 ---
 
-## 2. What FlexiWoo IS
+## 2. What This Project IS
 
-FlexiWoo is:
+This project is:
 
 - A **stateless HTML rendering engine** for WooCommerce pages
 - A **template composition system** using server-side string generation
 - A **validation layer** that rejects malformed input gracefully
 - A **security boundary** that sanitizes all output
 
-**FlexiWoo is NOT a commerce engine, API gateway, or state manager.**
+**This project is NOT a commerce engine, API gateway, or state manager.**
 
 ---
 
-## 3. What FlexiWoo Is NOT (Non-Negotiable)
+## 3. What This Project Is NOT (Non-Negotiable)
 
-FlexiWoo must **NEVER**:
+This project must **NEVER**:
 
 - Store state between requests (no databases, no files, no global variables)
 - Make outbound HTTP requests to WooCommerce or external services
@@ -42,7 +42,7 @@ FlexiWoo must **NEVER**:
 - Cache rendered output (caching is the caller's responsibility)
 - Trust input data without Zod validation
 
-**If your code needs to do any of the above, it belongs in the WordPress plugin, not FlexiWoo.**
+**If your code needs to do any of the above, it belongs in flexi-woo or flx, not this project.**
 
 ---
 
@@ -73,7 +73,7 @@ function renderPrice(price: string): string {
 
 ### 4.2 No State Persistence
 
-FlexiWoo must not:
+This project must not:
 
 - Write to the filesystem
 - Use global variables to store request data
@@ -109,7 +109,7 @@ return renderProductPage(body as ProductRenderRequest);
 
 ### 5.2 Trust Nothing
 
-- All input comes from the WordPress plugin
+- All input comes from flexi-woo (WordPress plugin)
 - WordPress plugins can be compromised
 - Validate and sanitize everything
 
@@ -148,7 +148,7 @@ All URLs must be sanitized:
 
 ### 6.3 No Dynamic Code Execution
 
-FlexiWoo must never:
+This project must never:
 
 - Use `eval()` or `new Function()`
 - Execute code from request payloads
@@ -160,7 +160,7 @@ FlexiWoo must never:
 
 ### 7.1 Graceful Degradation
 
-When FlexiWoo cannot render, it must:
+When this project cannot render, it must:
 
 1. Return HTTP 503
 2. Include `x-flexi-fallback` header with reason
@@ -304,7 +304,7 @@ Before submitting a PR, verify:
 
 ## 13. Final Note
 
-FlexiWoo's strength comes from **what it refuses to do**.
+This project's strength comes from **what it refuses to do**.
 
 Maintaining strict boundaries allows:
 
