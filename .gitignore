@@ -73,6 +73,7 @@ next-env.d.ts
 
 # claude
 .claude
+CLAUDE.md
 
 # Development and debugging files
 *-debug.json
