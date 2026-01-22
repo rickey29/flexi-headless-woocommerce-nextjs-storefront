@@ -1,5 +1,5 @@
 /**
- * Utility exports for the headless WooCommerce storefront.
+ * Utility exports for the flexi.
  */
 
 export { responseHeaders, type HeadersObject } from './headers';

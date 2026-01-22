@@ -1,5 +1,5 @@
 /**
- * Configuration exports for headless-woocommerce-nextjs-storefront.
+ * Configuration exports for flexi.
  */
 
 export { config, shouldLog, type LogLevel } from './env';

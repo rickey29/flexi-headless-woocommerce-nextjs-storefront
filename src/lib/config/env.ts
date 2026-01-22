@@ -1,5 +1,5 @@
 /**
- * Environment configuration for headless-woocommerce-nextjs-storefront
+ * Environment configuration for flexi.
  *
  * Centralizes environment variable access and validation
  * for consistent behavior across the application.
@@ -52,8 +52,8 @@ export const config = {
   SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN || '', // Client-side DSN (exposed to browser)
   SENTRY_DSN_SERVER: process.env.SENTRY_DSN || '', // Server-side DSN (secret)
 
-  // Debug configuration
-  DEBUG: process.env.DEBUG === 'true',
+  // Debug configuration (FLEXI_DEBUG for flexi-woo integration)
+  FLEXI_DEBUG: process.env.FLEXI_DEBUG === 'true',
 } as const;
 
 /**

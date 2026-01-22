@@ -153,33 +153,33 @@ describe('env configuration', () => {
     });
   });
 
-  describe('DEBUG configuration', () => {
-    test('should enable DEBUG when set to true', async () => {
-      setEnv('DEBUG', 'true');
+  describe('FLEXI_DEBUG configuration', () => {
+    test('should enable FLEXI_DEBUG when set to true', async () => {
+      setEnv('FLEXI_DEBUG', 'true');
       const { config } = await import('../env');
 
-      expect(config.DEBUG).toBe(true);
+      expect(config.FLEXI_DEBUG).toBe(true);
     });
 
-    test('should disable DEBUG when set to false', async () => {
-      setEnv('DEBUG', 'false');
+    test('should disable FLEXI_DEBUG when set to false', async () => {
+      setEnv('FLEXI_DEBUG', 'false');
       const { config } = await import('../env');
 
-      expect(config.DEBUG).toBe(false);
+      expect(config.FLEXI_DEBUG).toBe(false);
     });
 
-    test('should disable DEBUG when not set', async () => {
-      setEnv('DEBUG', undefined);
+    test('should disable FLEXI_DEBUG when not set', async () => {
+      setEnv('FLEXI_DEBUG', undefined);
       const { config } = await import('../env');
 
-      expect(config.DEBUG).toBe(false);
+      expect(config.FLEXI_DEBUG).toBe(false);
     });
 
-    test('should disable DEBUG for non-true values', async () => {
-      setEnv('DEBUG', '1');
+    test('should disable FLEXI_DEBUG for non-true values', async () => {
+      setEnv('FLEXI_DEBUG', '1');
       const { config } = await import('../env');
 
-      expect(config.DEBUG).toBe(false);
+      expect(config.FLEXI_DEBUG).toBe(false);
     });
   });
 
@@ -235,7 +235,7 @@ describe('env configuration', () => {
       expect(config).toHaveProperty('IS_PRODUCTION');
       expect(config).toHaveProperty('IS_TEST');
       expect(config).toHaveProperty('LOG_LEVEL');
-      expect(config).toHaveProperty('DEBUG');
+      expect(config).toHaveProperty('FLEXI_DEBUG');
     });
   });
 });

@@ -1,5 +1,5 @@
 /**
- * PII Sanitization utilities for headless-woocommerce-nextjs-storefront
+ * PII Sanitization utilities for flexi.
  *
  * Prevents sensitive customer data from being exposed in logs.
  * Designed for WooCommerce data structures (products, orders, customers).
