@@ -1,4 +1,4 @@
-# FlexiWoo (headless-woocommerce-nextjs-storefront)
+# FlexiWoo (flexi-storefront)
 
 > **Free Open-Source Headless WooCommerce Renderer**
 > Modern, fast, and beautiful store experiences powered by Next.js
@@ -25,7 +25,7 @@ FlexiWoo is a complete headless rendering solution that transforms your WooComme
 
 FlexiWoo consists of two components:
 
-### 1. headless-woocommerce-nextjs-storefront (This Repository)
+### 1. flexi-storefront (This Repository)
 
 **Next.js Rendering Engine**
 
@@ -35,7 +35,7 @@ FlexiWoo consists of two components:
 
 ### 2. flexi-woo (WordPress Plugin)
 
-**WordPress Bridge** - [See flexi-woo repository](https://github.com/nickey29/flexi-woo)
+**WordPress Bridge** - [See flexi-woo on WordPress.org](https://wordpress.org/plugins/flexi-woo/)
 
 - **Technology:** PHP 8+, WooCommerce 8+
 - **Purpose:** Intercepts WooCommerce pages, sends data to this project, displays rendered HTML
@@ -69,8 +69,8 @@ WordPress displays the rendered page
 
 ```bash
 # Clone the repository
-git clone https://github.com/nickey29/headless-woocommerce-nextjs-storefront.git
-cd headless-woocommerce-nextjs-storefront
+git clone https://github.com/rickey29/flexi-headless-woocommerce-nextjs-storefront.git
+cd flexi-headless-woocommerce-nextjs-storefront
 
 # Install dependencies
 yarn install
@@ -244,7 +244,7 @@ The UI matches the popular WooCommerce Storefront theme for familiarity:
 
 The companion WordPress plugin that bridges WooCommerce with this project.
 
-- Repository: [github.com/nickey29/flexi-woo](https://github.com/nickey29/flexi-woo)
+- WordPress.org: [wordpress.org/plugins/flexi-woo](https://wordpress.org/plugins/flexi-woo/)
 - Status: In Development
 
 ### FlxWoo (Premium Complement)
@@ -290,8 +290,8 @@ MIT License - Free for personal and commercial use.
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/nickey29/headless-woocommerce-nextjs-storefront/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/nickey29/headless-woocommerce-nextjs-storefront/discussions)
+- **Issues:** [GitHub Issues](https://github.com/rickey29/flexi-headless-woocommerce-nextjs-storefront/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/rickey29/flexi-headless-woocommerce-nextjs-storefront/discussions)
 
 ---
 

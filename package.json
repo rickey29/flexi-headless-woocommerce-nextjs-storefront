@@ -1,6 +1,6 @@
 {
-  "name": "headless-woocommerce-nextjs-storefront",
-  "version": "0.1.0",
+  "name": "flexi-storefront",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
