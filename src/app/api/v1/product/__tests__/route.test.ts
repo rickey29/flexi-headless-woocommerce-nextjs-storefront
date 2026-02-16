@@ -8,22 +8,26 @@ import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 import { POST, GET } from '../route';
 
-// Mock the renderer
-vi.mock('@/lib/renderers/product', () => ({
+// Mock the renderer - use the re-export path that route.ts imports from
+vi.mock('@/adapter/renderers/product', () => ({
   renderProductPage: vi.fn().mockResolvedValue('<html><body>Rendered Product</body></html>'),
 }));
 
-// Mock logger to avoid console output
-vi.mock('@/lib/utils/logger', () => ({
+// Mock the adapter modules - matching the canonical import paths
+vi.mock('@/adapter/logging/logger', () => ({
   generateRequestId: vi.fn().mockReturnValue('test-request-id'),
+  setRequestId: vi.fn(),
   logRenderRequest: vi.fn(),
   logRenderComplete: vi.fn(),
   logValidationError: vi.fn(),
   logError: vi.fn(),
 }));
 
-// Mock rate limiter
-vi.mock('@/lib/utils/rate-limit', () => ({
+vi.mock('@/adapter/logging/sanitize', () => ({
+  sanitizeProductData: vi.fn((data) => data),
+}));
+
+vi.mock('@/adapter/http/rate-limit', () => ({
   checkRateLimit: vi.fn().mockReturnValue({
     allowed: true,
     current: 1,
@@ -277,7 +281,7 @@ describe('POST /api/v1/product', () => {
 
   describe('render errors', () => {
     test('should return 503 when renderer throws', async () => {
-      const { renderProductPage } = await import('@/lib/renderers/product');
+      const { renderProductPage } = await import('@/adapter/renderers/product');
       vi.mocked(renderProductPage).mockRejectedValueOnce(new Error('Render failed'));
 
       const request = createRequest(validRequest);
@@ -287,7 +291,7 @@ describe('POST /api/v1/product', () => {
     });
 
     test('should include x-flexi-fallback header on render error', async () => {
-      const { renderProductPage } = await import('@/lib/renderers/product');
+      const { renderProductPage } = await import('@/adapter/renderers/product');
       vi.mocked(renderProductPage).mockRejectedValueOnce(new Error('Render failed'));
 
       const request = createRequest(validRequest);
@@ -299,7 +303,7 @@ describe('POST /api/v1/product', () => {
 
   describe('rate limiting', () => {
     test('should return 429 when rate limited', async () => {
-      const { checkRateLimit, rateLimitResponse } = await import('@/lib/utils/rate-limit');
+      const { checkRateLimit, rateLimitResponse } = await import('@/adapter/http/rate-limit');
       vi.mocked(checkRateLimit).mockReturnValueOnce({
         allowed: false,
         current: 100,
@@ -316,8 +320,8 @@ describe('POST /api/v1/product', () => {
     });
 
     test('should check rate limit before processing request', async () => {
-      const { checkRateLimit } = await import('@/lib/utils/rate-limit');
-      const { renderProductPage } = await import('@/lib/renderers/product');
+      const { checkRateLimit } = await import('@/adapter/http/rate-limit');
+      const { renderProductPage } = await import('@/adapter/renderers/product');
 
       vi.mocked(checkRateLimit).mockReturnValueOnce({
         allowed: false,

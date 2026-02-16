@@ -3,13 +3,8 @@ node_modules/
 
 # Build output
 .next/
-out/
-dist/
-build/
 
 # Build tools / Caches
-.turbo/
-.vercel/
 .swc/
 *.tsbuildinfo
 
@@ -17,9 +12,7 @@ build/
 coverage/
 
 # Lock files
-package-lock.json
 yarn.lock
-pnpm-lock.yaml
 
 # Generated files
 next-env.d.ts
@@ -31,13 +24,5 @@ public/
 *.svg
 *.ico
 
-# Database
-*.db
-*.sqlite
-
 # Environment files
 .env*
-
-# Misc
-.git/
-.DS_Store

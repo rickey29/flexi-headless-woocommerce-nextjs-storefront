@@ -7,14 +7,11 @@
 *.ts text eol=lf
 *.tsx text eol=lf
 *.js text eol=lf
-*.jsx text eol=lf
 *.mjs text eol=lf
-*.cjs text eol=lf
 *.json text eol=lf
 *.md text eol=lf
 *.css text eol=lf
-*.scss text eol=lf
-*.html text eol=lf
+*.svg text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
 *.sh text eol=lf
@@ -29,29 +26,8 @@
 # Lock files - treat as binary to avoid noisy diffs
 # ============================================================
 yarn.lock -diff linguist-generated
-package-lock.json -diff linguist-generated
 
 # ============================================================
 # Binary files (prevent corruption)
 # ============================================================
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
 *.ico binary
-*.webp binary
-*.avif binary
-*.svg binary
-*.woff binary
-*.woff2 binary
-*.ttf binary
-*.eot binary
-*.otf binary
-*.pdf binary
-
-# ============================================================
-# GitHub Linguist (accurate language statistics)
-# ============================================================
-*.lock linguist-generated
-coverage/** linguist-generated
-.next/** linguist-generated

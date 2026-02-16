@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { renderProductPage } from '@/lib/renderers/product';
+import { renderProductPage } from '@/adapter/renderers/product';
+import { responseHeaders } from '@/adapter/http/headers';
 import {
-  responseHeaders,
-  generateRequestId,
-  logRenderRequest,
-  logRenderComplete,
-  logValidationError,
-  logError,
-  sanitizeProductData,
   checkRateLimit,
   rateLimitResponse,
   getRateLimitHeaders,
   RATE_LIMITS,
-} from '@/lib/utils';
-import { ProductRenderRequestSchema, validateRequest } from '@/lib/schemas';
+} from '@/adapter/http/rate-limit';
+import {
+  generateRequestId,
+  setRequestId,
+  logRenderRequest,
+  logRenderComplete,
+  logValidationError,
+  logError,
+} from '@/adapter/logging/logger';
+import { sanitizeProductData } from '@/adapter/logging/sanitize';
+import { ProductRenderRequestSchema, validateRequest } from '@/core/schemas';
 
 // Force dynamic rendering - prevent Vercel/CDN from caching this route
 export const dynamic = 'force-dynamic';
@@ -21,6 +24,7 @@ export const revalidate = 0;
 
 export async function POST(request: NextRequest) {
   const requestId = generateRequestId();
+  setRequestId(requestId);
   const startTime = Date.now();
 
   // Rate limit check FIRST (before any processing)

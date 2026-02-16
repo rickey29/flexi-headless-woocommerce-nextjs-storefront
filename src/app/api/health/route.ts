@@ -17,8 +17,8 @@ import {
   rateLimitResponse,
   getRateLimitHeaders,
   RATE_LIMITS,
-  logError,
-} from '@/lib/utils';
+} from '@/adapter/http/rate-limit';
+import { logError } from '@/adapter/logging/logger';
 
 /**
  * GET /api/health
@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
       status,
       timestamp: new Date().toISOString(),
       uptime: Math.floor(uptime),
-      version: process.env.npm_package_version || '1.0.0',
+      version: process.env.npm_package_version || '1.1.0',
       memory: {
         heapUsed: Math.round(memoryUsage.heapUsed / 1024 / 1024), // MB
         heapTotal: Math.round(memoryUsage.heapTotal / 1024 / 1024), // MB

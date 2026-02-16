@@ -9,8 +9,6 @@ const eslintConfig = defineConfig([
   eslintConfigPrettier,
   globalIgnores([
     '.next/**',
-    'out/**',
-    'build/**',
     'coverage/**',
     'next-env.d.ts',
   ]),
@@ -31,7 +29,7 @@ const eslintConfig = defineConfig([
   },
   {
     // Allow console in logger utility and CLI scripts
-    files: ['src/lib/utils/logger.ts', 'scripts/**/*'],
+    files: ['src/adapter/logging/logger.ts'],
     rules: {
       'no-console': 'off',
     },

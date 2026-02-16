@@ -27,7 +27,6 @@ export default defineConfig({
       clean: true,
       exclude: [
         'node_modules/',
-        'dist/',
         '.next/',
         '**/*.test.ts',
         '**/*.test.tsx',
@@ -35,8 +34,6 @@ export default defineConfig({
         'vitest.config.ts',
         'vitest.setup.ts',
         'next.config.ts',
-        'tailwind.config.ts',
-        'src/**/index.ts',
       ],
       // Coverage thresholds (enforced)
       thresholds: {
@@ -48,7 +45,7 @@ export default defineConfig({
     },
 
     // Include test files
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    include: ['src/**/*.test.ts'],
 
     // Exclude patterns
     exclude: ['node_modules', 'dist', '.next', '.idea', '.git', '.cache'],

@@ -1,0 +1,103 @@
+name: Security Scanning
+
+on:
+  # Run on every pull request
+  pull_request:
+    branches:
+      - main
+      - develop
+
+  # Run on pushes to main
+  push:
+    branches:
+      - main
+
+  # Run daily at 9 AM UTC to catch new vulnerabilities
+  schedule:
+    - cron: '0 9 * * *'
+
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  npm-audit:
+    name: npm Dependency Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run npm audit (informational)
+        run: yarn audit --level info || true
+        continue-on-error: true
+
+      - name: Run npm audit (fail on high/critical)
+        run: yarn audit --level high
+        # This will fail the workflow if high or critical vulnerabilities are found
+
+      - name: Generate audit report
+        if: failure()
+        run: |
+          echo "## Security Vulnerabilities Found" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Run \`yarn audit\` locally to see details." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "To fix automatically:" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "yarn audit fix" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    # Only run on pull requests (compares PR dependencies to base branch)
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          # Fail on critical or high severity vulnerabilities
+          fail-on-severity: high
+          # Allow licenses commonly used in open source
+          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC
+
+  outdated-check:
+    name: Check for Outdated Dependencies
+    runs-on: ubuntu-latest
+    # Only run on schedule (don't fail PRs for outdated deps)
+    if: github.event_name == 'schedule'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Check for outdated dependencies
+        run: |
+          echo "## Outdated Dependencies Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          yarn outdated || true
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Run \`yarn outdated\` locally to see details." >> $GITHUB_STEP_SUMMARY
