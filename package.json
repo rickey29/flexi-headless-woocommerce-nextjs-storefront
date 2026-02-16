@@ -1,6 +1,6 @@
 {
-  "name": "flexi-storefront",
-  "version": "1.0.0",
+  "name": "flexi",
+  "version": "1.1.0",
   "description": "Free open-source reference rendering engine for WooCommerce pages",
   "license": "MIT",
   "private": true,

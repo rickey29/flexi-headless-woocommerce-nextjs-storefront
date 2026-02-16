@@ -84,8 +84,8 @@ WordPress displays the rendered page
 
 ```bash
 # Clone the repository
-git clone https://github.com/rickey29/flexi-storefront.git
-cd flexi-storefront
+git clone https://github.com/rickey29/flexiwoo-headless-woocommerce.git
+cd flexiwoo-headless-woocommerce
 
 # Install dependencies
 yarn install
@@ -182,8 +182,8 @@ MIT License - Free for personal and commercial use.
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/rickey29/flexi-storefront/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/rickey29/flexi-storefront/discussions)
+- **Issues:** [GitHub Issues](https://github.com/rickey29/flexiwoo-headless-woocommerce/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/rickey29/flexiwoo-headless-woocommerce/discussions)
 
 ---
 
