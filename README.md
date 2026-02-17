@@ -27,8 +27,8 @@ For complete positioning, see [docs/POSITIONING.md](docs/POSITIONING.md).
 - **Payment Gateway Redirects** - Many gateways assume checkout is served by WordPress and redirect to wp-relative URLs, breaking the flow when the frontend runs on a separate host
 - **Return-to-Checkout Edge Cases** - Payment callbacks, 3-D Secure returns, and order-pay links expect WordPress-routed URLs and session continuity that a headless frontend must reconstruct
 - **Timing and Race Conditions** - Nonce expiration, shipping rate recalculation, and coupon validation can fail when the delay between frontend render and backend POST exceeds WooCommerce's expected timing
-- **Plugin Compatibility** - WooCommerce extensions often inject markup via PHP hooks or enqueue scripts that assume a WordPress theme, making them invisible or broken in headless contexts
-- **Cache Invalidation** - Aggressive caching of product or cart data can serve stale prices, stock levels, or session tokens; correct invalidation requires coordination between CDN, renderer, and WooCommerce
+- **Plugin Compatibility** - WooCommerce extensions often inject markup via PHP hooks or enqueue scripts that assume a WordPress theme, making them invisible or broken in a headless setup
+- **Cache Invalidation** - Aggressive caching of product or cart data can serve stale prices, stock levels, or session tokens; correct invalidation requires coordination between the CDN, the renderer, and WooCommerce
 - **Theme-Coupled Hooks** - WooCommerce core and many plugins fire actions and filters inside theme templates; decoupling the theme removes those execution paths and their side effects
 
 ---
