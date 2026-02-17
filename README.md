@@ -87,6 +87,10 @@ For a broader conceptual explanation, see the [headless WooCommerce overview on 
 
 FlexiWoo renders the checkout page as a headless frontend, but it does not process payments or manage orders. WooCommerce continues to handle payment gateways, order creation, and server-side session logic. FlexiWoo is UI-only for checkout and does not replace WooCommerce's payment infrastructure. This separation preserves compatibility with existing gateways and WooCommerce extensions.
 
+### Production Notes
+
+FlexiWoo is designed with native WooCommerce fallback to prevent checkout downtime if the renderer becomes unavailable. It has been tested with standard WooCommerce payment gateway flows (including redirect-based gateways) to preserve session continuity and return-to-checkout behavior. The architecture prioritizes transactional integrity over frontend decoupling to maintain production stability.
+
 ---
 
 ## Quick Start
