@@ -22,14 +22,14 @@ For complete positioning, see [docs/POSITIONING.md](docs/POSITIONING.md).
 
 ## Why Headless WooCommerce is Hard
 
-- **Fast Rendering** - Next.js 16 with React 19 for optimal performance
-- **Complete Page Coverage** - Renders ALL WooCommerce pages (products, shop, cart, checkout, thank-you, account, search)
-- **WooCommerce Storefront Design** - Familiar UI that matches the popular Storefront theme
-- **Secure by Default** - Zod validation, PII sanitization, HTML escaping
-- **Graceful Fallback** - Automatically reverts to native WooCommerce if renderer unavailable
-- **Production-Ready Logging** - Structured logging with configurable levels and request tracing
-- **Easy to Fork** - Clean Tailwind CSS v4 templates that you can customize
-- **No Telemetry** - No analytics, tracking, or external service dependencies
+- **Session Coupling** - WooCommerce ties cart and checkout state to server-side PHP sessions, which a decoupled frontend cannot access without bridging cookies and nonces across domains
+- **Cart State Drift** - Cart contents can diverge between the frontend and WooCommerce when concurrent requests, coupons, or inventory changes modify server state between renders
+- **Payment Gateway Redirects** - Many gateways assume checkout is served by WordPress and redirect to wp-relative URLs, breaking the flow when the frontend runs on a separate host
+- **Return-to-Checkout Edge Cases** - Payment callbacks, 3-D Secure returns, and order-pay links expect WordPress-routed URLs and session continuity that a headless frontend must reconstruct
+- **Timing and Race Conditions** - Nonce expiration, shipping rate recalculation, and coupon validation can fail when the delay between frontend render and backend POST exceeds WooCommerce's expected timing
+- **Plugin Compatibility** - WooCommerce extensions often inject markup via PHP hooks or enqueue scripts that assume a WordPress theme, making them invisible or broken in headless contexts
+- **Cache Invalidation** - Aggressive caching of product or cart data can serve stale prices, stock levels, or session tokens; correct invalidation requires coordination between CDN, renderer, and WooCommerce
+- **Theme-Coupled Hooks** - WooCommerce core and many plugins fire actions and filters inside theme templates; decoupling the theme removes those execution paths and their side effects
 
 ---
 
@@ -66,6 +66,14 @@ flexi renders HTML with modern design
          ↓
 WordPress displays the rendered page
 ```
+
+---
+
+## Headless WooCommerce Architecture
+
+Headless WooCommerce separates the frontend rendering layer from the WooCommerce backend engine. WooCommerce remains responsible for products, customers, orders, payments, and server-side session behavior. The flexi-woo plugin intercepts WooCommerce page requests and assembles the page data needed for rendering. It sends this data to flexi (the Next.js renderer) over REST endpoints such as product, cart, and checkout payloads. flexi renders the page into HTML and returns the result to WordPress. WordPress then serves the rendered HTML to the visitor while preserving WooCommerce's native transactional logic. If the renderer is unavailable, the request falls back to native WooCommerce rendering to maintain availability.
+
+For a broader conceptual explanation, see the [headless WooCommerce overview on FlexPlat](https://flexplat.com/headless-woocommerce).
 
 ---
 
