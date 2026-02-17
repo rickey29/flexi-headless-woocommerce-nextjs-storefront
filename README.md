@@ -22,14 +22,6 @@ FlexiWoo is **infrastructure**, not a product:
 
 For complete positioning, see [docs/POSITIONING.md](docs/POSITIONING.md).
 
----
-
-## What is Headless WooCommerce?
-
-Headless WooCommerce separates the frontend rendering layer from WordPress while keeping WooCommerce responsible for products, carts, checkout, and payments.
-
-In a headless architecture, the frontend can be built with frameworks like Next.js while WooCommerce continues managing transactional logic and server-side sessions.
-
 FlexiWoo demonstrates a production-safe way to implement Headless WooCommerce without breaking payment gateways, session handling, or native WooCommerce fallback behavior.
 
 ---
