@@ -1,6 +1,10 @@
-# FlexiWoo (flexi)
+# Headless WooCommerce — FlexiWoo (Next.js Reference Implementation)
 
-FlexiWoo is a headless WooCommerce implementation that provides production-ready frontend templates for WooCommerce using a REST-based architecture.
+FlexiWoo is a production-ready Headless WooCommerce reference implementation built with Next.js.
+
+It provides a self-hosted rendering layer that keeps WooCommerce as the transactional backend while enabling a modern decoupled frontend architecture.
+
+FlexiWoo is infrastructure, not a SaaS product — it is designed for developers and agencies who want full frontend control while preserving WooCommerce compatibility.
 
 ---
 
